@@ -1,53 +1,69 @@
-// Copyright 2022 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeText({
-    text: 'OFF'
-  });
-});
-
 const hackernewsurl = 'https://news.ycombinator.com';
 
-// When the user clicks on the extension action
+let toggle = "OFF"
+
+// chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
+//   if (!tab.url) return;
+//   const url = new URL(tab.url);
+//   // Enables the side panel on google.com
+//   if (url.origin === hackernewsurl) {
+//     await chrome.sidePanel.setOptions({
+//       tabId,
+//       path: 'sidepanel.html',
+//       enabled: true
+//     });
+//   } else {
+//     // Disables the side panel on all other sites
+//     await chrome.sidePanel.setOptions({
+//       tabId,
+//       enabled: false
+//     });
+//   }
+// });
+
+// chrome.action.onClicked.addListener(async (tab) => {
+//   await chrome.sidePanel.setOptions({path: 'sidepanel.html'}).then(async (val)=>{
+//     await chrome.sidePanel.open({
+//       tabId: tab.id
+//     });
+//   });
+// });
+
 chrome.action.onClicked.addListener(async (tab) => {
-  if (tab.url.startsWith(hackernewsurl)) {
-    // We retrieve the action badge to check if the extension is 'ON' or 'OFF'
-    const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
-    // Next state will always be the opposite
-    const nextState = prevState === 'ON' ? 'OFF' : 'ON';
-
-    // Set the action badge to the next state
-    await chrome.action.setBadgeText({
-      tabId: tab.id,
-      text: nextState
-    });
-
-    if (nextState === 'ON') {
-      // Insert the CSS file when the user turns the extension on
-      await chrome.scripting.insert({
-        files: ['focus-mode.css'],
-        target: { tabId: tab.id }
+  if(tab.url.match(hackernewsurl.toString())){
+    if(toggle=="OFF"){
+      toggle = "ON"
+      chrome.sidePanel.setOptions({
+        tabId:tab.id,
+        path: 'sidepanel.html',
+        enabled: true,
       });
-    } else if (nextState === 'OFF') {
-      // Remove the CSS file when the user turns the extension off
-      await chrome.scripting.removeCSS({
-        files: ['focus-mode.css'],
-        target: { tabId: tab.id }
+      
+      await chrome.sidePanel.open({
+        tabId:tab.id,
+      });
+  
+      chrome.sidePanel
+    .setPanelBehavior({ openPanelOnActionClick: true })
+    .catch((error) => console.error(error));
+    }
+    else{
+      toggle = "OFF"
+      chrome.sidePanel.setOptions({
+        tabId:tab.id,
+        path: 'sidepanel.html',
+        enabled: false,
       });
     }
   }
 });
 
 
+// // chrome.action.onClicked.addListener(async (tab) => {
+
+
+// // });
+
+// chrome.sidePanel
+//   .setPanelBehavior({ openPanelOnActionClick: true })
+//   .catch((error) => console.error(error));
