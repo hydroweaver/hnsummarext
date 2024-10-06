@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Focus Mode",
-    "description": "Enable focus mode on Chrome's official Extensions and Chrome Web Store documentation.",
+    "name": "HN Summarizer",
+    "description": "Summarize long comments on Hacker News.",
     "version": "1.0",
     "action": {
         "icons": {

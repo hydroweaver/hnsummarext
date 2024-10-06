@@ -1,69 +1,45 @@
-const hackernewsurl = 'https://news.ycombinator.com';
+const hackernewsurl = "https://news.ycombinator.com/item";
 
-let toggle = "OFF"
-
-// chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
-//   if (!tab.url) return;
-//   const url = new URL(tab.url);
-//   // Enables the side panel on google.com
-//   if (url.origin === hackernewsurl) {
-//     await chrome.sidePanel.setOptions({
-//       tabId,
-//       path: 'sidepanel.html',
-//       enabled: true
-//     });
-//   } else {
-//     // Disables the side panel on all other sites
-//     await chrome.sidePanel.setOptions({
-//       tabId,
-//       enabled: false
-//     });
-//   }
-// });
-
-// chrome.action.onClicked.addListener(async (tab) => {
-//   await chrome.sidePanel.setOptions({path: 'sidepanel.html'}).then(async (val)=>{
-//     await chrome.sidePanel.open({
-//       tabId: tab.id
-//     });
-//   });
-// });
+// On extension button click, side bar should be open and should only be visible on hacker news
+//defining side_panel in manifest makes the side panel global and creates problems
+let toggle = "OFF";
+let tabId;
 
 chrome.action.onClicked.addListener(async (tab) => {
-  if(tab.url.match(hackernewsurl.toString())){
-    if(toggle=="OFF"){
-      toggle = "ON"
+  if (tab.url.match(hackernewsurl.toString())) {
+    tabId = tab.id
+    if (toggle == "OFF") {
+      toggle = "ON";
       chrome.sidePanel.setOptions({
-        tabId:tab.id,
-        path: 'sidepanel.html',
+        tabId: tabId,
+        path: "sidepanel.html",
         enabled: true,
       });
-      
+
       await chrome.sidePanel.open({
-        tabId:tab.id,
-      });
-  
-      chrome.sidePanel
-    .setPanelBehavior({ openPanelOnActionClick: true })
-    .catch((error) => console.error(error));
-    }
-    else{
-      toggle = "OFF"
+        tabId: tabId,
+      }).then((val)=>{
+        chrome.scripting.executeScript({
+          target: {
+            tabId: tabId
+          },
+          files: ["initialInjection.js"]
+        })
+      })
+    } else {
+      toggle = "OFF";
       chrome.sidePanel.setOptions({
-        tabId:tab.id,
-        path: 'sidepanel.html',
+        tabId: tab.id,
+        path: "sidepanel.html",
         enabled: false,
+      }).then((val)=>{
+        chrome.scripting.executeScript({
+          target: {
+            tabId: tabId
+          },
+          files: ["toggleCleanup.js"]
+        })
       });
     }
   }
 });
-
-
-// // chrome.action.onClicked.addListener(async (tab) => {
-
-
-// // });
-
-// chrome.sidePanel
-//   .setPanelBehavior({ openPanelOnActionClick: true })
-//   .catch((error) => console.error(error));
