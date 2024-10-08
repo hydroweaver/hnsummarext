@@ -3,7 +3,7 @@ commentTree = document
   .getElementsByTagName("tr");
 
 
-insertion = '"<button class=\\"summarizer\\">Summarize</button>"'
+insertion = '"<button class=\\"summarizerbutton\\">Summarize</button>"'
 
 
 for (let i = 0; i < commentTree.length; i++) {
@@ -13,5 +13,15 @@ for (let i = 0; i < commentTree.length; i++) {
     commentTree[i]
       .getElementsByClassName("comhead")[0]
       .insertAdjacentElement("afterend", empty_div.querySelector("button"));
+  }
+} 
+
+function summarizeButtonCommentAccumulator(buttonHead){
+  let head = buttonHead.closest('.athing.comtr') //     head = $0.closest('.athing.comtr')
+  let accumulated_comment = []
+  while (Number(head.nextElementSibling.getElementsByTagName("td")[1].getAttribute("indent")) != 0) {
+    accumulated_comment.push(head.querySelector(".comment").getElementsByTagName("div")[0].innerHTML)
+    console.log(Number(head.getElementsByTagName("td")[1].getAttribute("indent")),head);
+    head = head.nextElementSibling
   }
 }

@@ -12,7 +12,7 @@ chrome.action.onClicked.addListener(async (tab) => {
       toggle = "ON";
       chrome.sidePanel.setOptions({
         tabId: tabId,
-        path: "sidepanel.html",
+        path: "sidepanel/sidepanel.html",
         enabled: true,
       });
 

@@ -1,29 +1,5 @@
-x = document.getElementsByClassName("comment-tree")[0].getElementsByTagName("tr")
-
-
-empty_div.innerHTML = JSON.parse(insertion)
-
-for(let i=0;i<x.length;i++){
-    if(x[i].getElementsByTagName("td")[1].getAttribute("indent")=='0'){
-        // console.log(x[i].getElementsByClassName("comment").item(0).getElementsByClassName("commtext c00").item(0).innerHTML)
-        empty_div.innerHTML = JSON.parse(insertion)
-        x[i].getElementsByClassName("comhead")[0].insertAdjacentElement('afterend', empty_div.querySelector('a'))
-    }
-  }
-
-
-
-
-
-    y = document.createElement('div')
-
-    y.innerHTML = JSON.parse(insertion)
-
-
-    x[0].getElementsByClassName("comhead")[0].insertAdjacentElement('afterend',y.querySelector('a'))
-
-
-    Load local storage image
+//Load local storage image
+// background.js calls a script which gets the comment, puts it in local storage and then the sidepanel code/js calls the storage and process the comment --> how its done in chrome extension 
 
 // run script on extension click
 // top comments found with a side button image
