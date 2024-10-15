@@ -17,19 +17,13 @@ for (let i = 0; i < commentTree.length; i++) {
         let head = event.target.closest('.athing.comtr') //     head = $0.closest('.athing.comtr')
         let accumulated_comment = []
         while(head.nextElementSibling!=null && (Number(head.nextElementSibling.getElementsByTagName("td")[1].getAttribute("indent")) != 0)){
-          console.log('I am here')
           accumulated_comment.push(head.querySelector(".comment").getElementsByTagName("div")[0].innerHTML)
           head = head.nextElementSibling
         }
         accumulated_comment.push(head.querySelector(".comment").getElementsByTagName("div")[0].innerHTML)
-        // while (Number(head.nextElementSibling.getElementsByTagName("td")[1].getAttribute("indent")) != 0) {
-        //   accumulated_comment.push(head.querySelector(".comment").getElementsByTagName("div")[0].innerHTML)
-        //   // console.log(Number(head.getElementsByTagName("td")[1].getAttribute("indent")),head);
-        //   head = head.nextElementSibling
-        // }
-        // accumulated_comment.push(head.querySelector(".comment").getElementsByTagName("div")[0].innerHTML)
-        // console.log(event.target.closest('.athing.comtr'))
-        console.log(accumulated_comment)
+        chrome.storage.local.set({ comment: accumulated_comment }).then(() => {
+          console.log("Comment accumulated to local storage");
+        });
     })
   }
 }
