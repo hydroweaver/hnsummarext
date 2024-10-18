@@ -3,13 +3,15 @@
 
 // run script on extension click - Done
 // top comments found with a side button image - Done
-//Store image in local storage for icon
 // side bar opens - Done
 // on click of button on each top comment comment passed to side bar - done 
-//Summarize it if too small says so and display on side bar - Event listener
 //In case changes to page, such as more, non main hacker news etc. extension stops - Done
-// Side bar logic also checks for depth of the comment and providers a button for you to go down and get summary, so it runs a loop to check depth gets all texts and summarises
 // on click for OFF, script needs to be removed too - Done
+
+//Store image in local storage for icon
+//Summarize it if too small says so and display on side bar - Event listener
+// Side bar logic also checks for depth of the comment and providers a button for you to go down and get summary, so it runs a loop to check depth gets all texts and summarises
+//Page reload should kill the extension or reload it auto, since it does not remove the side bar
 
 // Next:
 // On clicking a comment if a sub comment is also a big tree, provide buttons for them too
