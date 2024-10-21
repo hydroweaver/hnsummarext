@@ -1,23 +1,6 @@
-//Check if model exists (as is from documentation)
-// const canSummarize = await ai.summarizer.capabilities();
-// let summarizer;
-// if (canSummarize && canSummarize.available !== 'no') {
-//   if (canSummarize.available === 'readily') {
-//     // The summarizer can immediately be used.
-//     summarizer = await ai.summarizer.create();
-//   } else {
-//     // The summarizer can be used after the model download.
-//     summarizer = await ai.summarizer.create();
-//     summarizer.addEventListener('downloadprogress', (e) => {
-//       console.log(e.loaded, e.total);
-//     });
-//     await summarizer.ready;
-//   }
-// } else {
-//     // The summarizer can't be used at all.
-// }
-
-
+// can use `require('markdown-it')` for CJS
+import markdownit from 'markdown-it'
+const md = markdownit()
 
 async function modelReadiness(){
     try {
@@ -41,7 +24,7 @@ async function useModel(){
     const modelReady = await modelReadiness()
     if (modelReady && modelReady.available !== 'no') {
             if (modelReady.available === 'readily') {
-                summarizer = await createModel()
+                const summarizer = await createModel()
                 document.querySelector('p.model-status').innerHTML = "Summarization Model Ready for use"
                 chrome.storage.onChanged.addListener((localMemory) => {
                     // console.log(localMemory.comment.newValue);
@@ -53,7 +36,7 @@ async function useModel(){
             }
             else{
                 // The summarizer can be used after the model download.
-                summarizer = await createModel()
+                const summarizer = await createModel()
                 summarizer.addEventListener('downloadprogress', (e) => {
                     console.log(e.loaded, e.total);
                 });
@@ -63,11 +46,11 @@ async function useModel(){
     }
 }
 
-useModel()
-
 async function summarize(passedCommentText, summarizerModel) {
     //Need to implemented logic of how much model can take, if summary is needed, etc.
     const summary = await summarizerModel.summarize(passedCommentText)
-    document.getElementsByClassName("summary")[0].innerHTML = summary
+    document.getElementsByClassName("summary")[0].innerHTML = md.render(summary)
     // summarizer.destroy(); Seems to be not needed anymore
 }
+
+useModel()
