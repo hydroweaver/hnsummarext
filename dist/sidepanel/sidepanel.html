@@ -2,12 +2,23 @@
 <html>
   <head>
     <title>Hacker News Summarizer</title>
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
   </head>
   <body>
     <h1>Summarized Comment</h1>
     <p style="font-weight: bold;" class="model-status"></p>
-    <div class="markdown"></div>
-    <p><md class="summary">This is the short summary of the comment</md></p>
+    <div class="loader"></div>
+    <!-- Summart gets loaded to summary markdown element -->
+    <p><md class="summary"></md></p>
     <script src="bundle.js"></script>
   </body>
 </html>
