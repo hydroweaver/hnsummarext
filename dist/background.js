@@ -6,8 +6,7 @@ const hackernewsurl = "https://news.ycombinator.com";
 let toggle = "OFF";
 let tabId;
 
-
-
+//run injection when extension clicked
 chrome.action.onClicked.addListener(async (tab) => {
   if (!tab.url) return;
   if (tab.url.match(hackernewsurl)) {
@@ -53,7 +52,11 @@ chrome.action.onClicked.addListener(async (tab) => {
   }
 });
 
+
+//run when tab reloaded or user navigates to another page
+
 //Has unintended effect on new tabs, where this gets injected, but side panel is not opened as it needs manual user input which triggers the previous onclick (Best to right click and open side bar)
+
 chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
   if (!tab.url) return;
   if(tab.status === 'complete'){
@@ -76,6 +79,13 @@ chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
           tabId: tabId
         },
         files: ["initialInjection.js"]
+      })
+    }
+    else{
+      chrome.sidePanel.setOptions({
+        tabId: tab.id,
+        path: "sidepanel.html",
+        enabled: false,
       })
     }
   }

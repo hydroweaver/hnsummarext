@@ -16,7 +16,7 @@
 * cleaner code!
 * better inbuilt documentation
 * Store image in local storage for icon
-* Chat with accumulated context
+* Chat with accumulated context, prompt API
 * comment written by AI?
 * SRe accessibility point
 * Sre idea for extension - whisper local speech model
@@ -24,6 +24,8 @@
 * Page reload should kill the extension or reload it auto, since it does not remove the side bar
 * Correct messages for unsupported chrome versions (non canary)
 * Time taken to summarize with local
+* border for text / summary
+* clean sidebar when page is changed so older summary is removed
 * Next / Previous Comment scroller
 
 ## Feedback for Nano
