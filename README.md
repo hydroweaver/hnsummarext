@@ -2,7 +2,7 @@
 
 ✔️ Love hacker news, but can't go through each comment?
 
-✔️ Want to get the gist of the top comment and it's replies? 
+✔️ Want to get the gist of the top comment and its replies? 
 
 ✔️ Tired of copy pasting text into GPT to get summaries?
 
