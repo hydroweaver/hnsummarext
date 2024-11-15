@@ -6,7 +6,8 @@
 🚀Get HN Summariser 🚀
 
 ## Quick Demo
-[Hacker News Summarizer using Google Gemini Nano ✨](https://www.youtube.com/watch?v=kRb2ENro0xw)
+
+[![Hacker News Summarizer using Google Gemini Nano ✨](http://i.ytimg.com/vi/kRb2ENro0xw/hqdefault.jpg)](https://www.youtube.com/watch?v=kRb2ENro0xw)
 
 ## How-to🤔
 1. Ensure you are using the correct canary version per the [documentation](https://docs.google.com/document/d/1Bvd6cU9VIEb7kHTAOCtmmHNAYlIZdeNmV7Oy-2CtimA/edit?usp=sharing)
