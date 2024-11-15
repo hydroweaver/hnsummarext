@@ -1,8 +1,11 @@
 # Submission for [Google Chrome Built-in AI Challenge](https://googlechromeai.devpost.com/)
 
-✔️ Love hacker news, but can't go through each comment? 
+✔️ Love hacker news, but can't go through each comment?
+
 ✔️ Want to get the gist of the top comment and it's replies? 
+
 ✔️ Tired of copy pasting text into GPT to get summaries?
+
 🚀Get HN Summariser 🚀
 
 ## Quick Demo
